@@ -63,7 +63,7 @@ SELECT * FROM Movies; /*View all Movie data*/
 SELECT * FROM Ratings;
 
 
-SELECT consumer_first_name, consumer_last_name, movie_title, rating_star_number
+SELECT consumer_first_name, consumer_last_name, movie_title, rating_stars
       FROM Movies
           NATURAL JOIN Ratings
           NATURAL JOIN Consumers;
