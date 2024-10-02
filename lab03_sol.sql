@@ -95,7 +95,7 @@ CREATE TABLE genres(
     genre_id  INT AUTO_INCREMENT,
     genre_name VARCHAR(64)
 );
-CREATE TABLE movie_genre(
+CREATE TABLE movie_genres(
     PRIMARY KEY (movie_id,genre_id),
     movie_id        INT,
     genre_id        INT
@@ -173,7 +173,7 @@ SELECT movie_title, genre_name
         NATURAL JOIN movie_genres
         NATURAL JOIN genres;
 
-SELECT consumer_first_name, consumer_last_name, movie_title, rating_star_number
+SELECT consumer_first_name, consumer_last_name, movie_title, rating_stars
       FROM Movies
           NATURAL JOIN Ratings
           NATURAL JOIN Consumers;
