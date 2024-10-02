@@ -6,7 +6,7 @@ CREATE DATABASE movie_rating;
 USE movie_rating;
 
 
-/* Create a table */
+/* Creates a table */
 CREATE TABLE Movies (
     PRIMARY KEY (Movie_id),
     movie_id            INT AUTO_INCREMENT,
@@ -91,8 +91,8 @@ CREATE TABLE Movies (
     release_date         Date
 );
 CREATE TABLE genres(
-    PRIMARY KEY(genre_id)
-    genre_id  INT AUTO_INCREMENT
+    PRIMARY KEY(genre_id),
+    genre_id  INT AUTO_INCREMENT,
     genre_name VARCHAR(64)
 );
 CREATE TABLE movie_genre(
@@ -121,7 +121,7 @@ CREATE TABLE Ratings (
 );
 
 
-INSERT INTO Movies (movie_title,release_date,genre)
+INSERT INTO Movies (movie_title,release_date)
 VALUES ("The Hunt for Red October",'1990-03-02'),
        ("Lady Bird",'2017-12-01'),
        ("Inception",'2010-08-16'),
