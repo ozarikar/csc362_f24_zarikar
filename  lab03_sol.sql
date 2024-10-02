@@ -23,7 +23,7 @@ CREATE TABLE Consumers (
     consumer_address               VARCHAR(150),
     consumer_city                  VARCHAR(15),
     consumer_state                 VARCHAR(2),
-    zip_code              VARCHAR(6)
+    zip_code                       VARCHAR(10)
 );
 
 CREATE TABLE Ratings (
