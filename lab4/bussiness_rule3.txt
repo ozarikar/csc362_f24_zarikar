@@ -1,0 +1,58 @@
+BUSINESS RULE SPECIFICATIONS
+
+RULE INFORMATION
+
+Statement: A Customer cannot be deleted if they have made purchases.
+
+Constraint: A customer record must be retained if it is associated with any sales records.
+
+Type:     Database Oriented:     X
+          Application Oriented   _ 
+
+Category: Field Specific:        _ 
+          Relationship Specific: X
+
+Test On:  Insert:                _ 
+          Delete:                X
+          Update:                _
+
+
+STRUCTURES AFFECTED
+
+Field Names: customer_id
+
+Table Names: customer, Sales, Trial
+
+
+FIELD ELEMENTS AFFECTED
+
+Physical Elements: Data Type:           INT
+                   Length:              _ 
+                   Character Support:   0-9
+
+Logical Elements:  Key Type:            PK
+                   Key Structure:       Single Field
+                   Uniqueness:          X
+                   Null Support:        _ 
+                   Values Entered By:   System
+                   Range of Values:     >0 
+                   Edit Rule:           _
+
+
+RELATIONSHIP CHARACTERISTICS AFFECTED
+
+    Deletion rule:              _Deny
+    Type of participation:      _
+    Degree of participation:    _
+
+    
+ACTION TAKEN
+
+_ When a delete operation is attempted on a customer record that has 
+associated sales records, the operation will be denied,preserving the 
+integrity of historical sales data unless the customer has some privacy 
+concerns.
+
+
+NOTES: _The customer is considered a customer for life. This rule ensures 
+that data on sales and customer history is maintained.
