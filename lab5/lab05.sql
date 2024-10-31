@@ -11,9 +11,9 @@ CREATE TABLE customers (
     customer_last_name      VARCHAR(50),
     address_id              INT,
     customer_phone          VARCHAR(20),
-    FOREIGN KEY (address_id) references address(address_id)
+    FOREIGN KEY (address_id) references address_data(address_id)
 );
-CREATE TABLE address(
+CREATE TABLE address_data(
     address_id  INT AUTO_INCREMENT primary key,
     address_line1 VARCHAR(50),
     address_line2 VARCHAR(50),
