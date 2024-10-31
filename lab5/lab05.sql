@@ -29,8 +29,8 @@ Create table style(
     style_id int AUTO_INCREMENT primary key,
     style_name VARCHAR(50)
 );
-CREATE table primary_material(
-    primary_material_id int AUTO_INCREMENT primary key,
+CREATE table material(
+    material_id int AUTO_INCREMENT primary key,
     material_name VARCHAR(50)
 );
 
@@ -42,12 +42,12 @@ Create table inventory(
     country_id int,
     year_made year,
     style_id int,
-    primary_material_id int,
+    material_id int,
     product_length int,
     product_width int,
     FOREIGN KEY (country_id) references country(country_id),
     FOREIGN KEY (style_id) references style(style_id),
-    FOREIGN KEY (primary_material_id) primary_material(primary_material_id)
+    FOREIGN KEY (material_id) references material(material_id)
 );
 
 
@@ -61,6 +61,7 @@ Create table sales(
     FOREIGN KEY (customer_id) references customers(customer_id),
     FOREIGN KEY (inventory_id) references inventory(inventory_id)
 );
+
 Create table trial(
     trial_id int AUTO_INCREMENT primary key,
     customer_id int,
