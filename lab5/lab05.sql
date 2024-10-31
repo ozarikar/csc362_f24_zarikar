@@ -32,8 +32,8 @@ Create table inventory(
     product_length int,
     product_width int,
     FOREIGN KEY (country_id) references country(country_id),
-    FOREIGN key (style_id) references style(style_id),
-    FOREIGN key (primary_material_id) primary_material(primary_material_id)
+    FOREIGN KEY (style_id) references style(style_id),
+    FOREIGN KEY (primary_material_id) primary_material(primary_material_id)
 );
 
 CREATE TABLE country(
@@ -55,8 +55,8 @@ Create table sales(
     sale_price decimal(10,2),
     net_on_sale decimal(10,2),
     sale_date date,
-    FOREIGN key (customer_id) references customers(customer_id),
-    FOREIGN key (inventory_id) references inventory(inventory_id)
+    FOREIGN KEY (customer_id) references customers(customer_id),
+    FOREIGN KEY (inventory_id) references inventory(inventory_id)
 );
 Create table trial(
     trial_id int AUTO_INCREMENT primary key,
@@ -64,8 +64,8 @@ Create table trial(
     inventory_id int,
     start_date date,
     estimated_return_date date,
-    FOREIGN key (customer_id) references customers(customer_id),
-    FOREIGN key (inventory_id) references inventory(inventory_id)
+    FOREIGN KEY (customer_id) references customers(customer_id),
+    FOREIGN KEY (inventory_id) references inventory(inventory_id)
 );
 
 /* fills data in the table */
