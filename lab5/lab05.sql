@@ -9,7 +9,8 @@ CREATE TABLE address(
     address_id  INT AUTO_INCREMENT primary key,
     address_line1 VARCHAR(50),
     address_line2 VARCHAR(50),
-    state_abbreviation VARCHAR(2)
+    state_abbreviation VARCHAR(2),
+    address_zip_code VARCHAR(10)
 );
 
 CREATE TABLE customers (
