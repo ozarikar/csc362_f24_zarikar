@@ -57,7 +57,6 @@ Create table sales(
     customer_id int,
     inventory_id int,
     sale_price decimal(10,2),
-    net_on_sale decimal(10,2),
     sale_date date,
     FOREIGN KEY (customer_id) references customers(customer_id),
     FOREIGN KEY (inventory_id) references inventory(inventory_id)
