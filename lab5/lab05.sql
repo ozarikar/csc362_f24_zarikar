@@ -79,12 +79,12 @@ VALUES("Turkey"),("Iran"),("India"),("Afghanistan");
 INSERT INTO style(style_name)
 VALUES ("Ushak"),("Tabriz"),("Agra");
 
-INSERT INTO primary_material(material_name)
+INSERT INTO material(material_name)
 VALUES ("Wool"),("Cotton"), ("Silk");
 
 
-INSERT INTO inventory(purchase_price,date_aquired,markup,country_id,year_made,style_id
-primary_material_id,product_length,product_width)
+INSERT INTO inventory(purchase_price,date_aquired,markup,country_id,year_made
+,style_id,primary_material_id,product_length,product_width)
 VALUES(1000.00,'2000-11-22',50,1,1999,2,2,5,6),
     (1020.00,'2020-11-22',100,2,1990,3,1,10,20);
 
