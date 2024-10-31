@@ -5,6 +5,13 @@ CREATE DATABASE shop;
 USE shop;
 
 /* Create a tables */
+CREATE TABLE address_data(
+    address_id  INT AUTO_INCREMENT primary key,
+    address_line1 VARCHAR(50),
+    address_line2 VARCHAR(50),
+    state_abbreviation VARCHAR(2)
+);
+
 CREATE TABLE customers (
     customer_id             INT AUTO_INCREMENT primary key,
     customer_first_name     VARCHAR(50),
@@ -13,11 +20,18 @@ CREATE TABLE customers (
     customer_phone          VARCHAR(20),
     FOREIGN KEY (address_id) references address_data(address_id)
 );
-CREATE TABLE address_data(
-    address_id  INT AUTO_INCREMENT primary key,
-    address_line1 VARCHAR(50),
-    address_line2 VARCHAR(50),
-    state_abbreviation VARCHAR(2)
+
+CREATE TABLE country(
+    country_id int AUTO_INCREMENT primary key,
+    country_name VARCHAR(50)
+);
+Create table style(
+    style_id int AUTO_INCREMENT primary key,
+    style_name VARCHAR(50)
+);
+CREATE table primary_material(
+    primary_material_id int AUTO_INCREMENT primary key,
+    material_name VARCHAR(50)
 );
 
 Create table inventory(
@@ -36,18 +50,7 @@ Create table inventory(
     FOREIGN KEY (primary_material_id) primary_material(primary_material_id)
 );
 
-CREATE TABLE country(
-    country_id int AUTO_INCREMENT primary key,
-    country_name VARCHAR(50)
-);
-Create table style(
-    style_id int AUTO_INCREMENT primary key,
-    style_name VARCHAR(50)
-);
-CREATE table primary_material(
-    primary_material_id int AUTO_INCREMENT primary key,
-    material_name VARCHAR(50)
-);
+
 Create table sales(
     sale_id int AUTO_INCREMENT primary key,
     customer_id int,
