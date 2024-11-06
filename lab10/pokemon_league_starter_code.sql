@@ -69,3 +69,7 @@ INSERT INTO pokemon (pokemon_species, pokemon_level, trainer_id, pokemon_is_in_p
         ("Staryu21",  "44", 1, TRUE),
         ("Onyx21",    "52", 1, TRUE),
         ("Magicarp11","12", 1, TRUE);
+
+
+SELECT pokemon_species from pokemon
+where trainer_id = 1;
