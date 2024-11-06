@@ -66,9 +66,11 @@ INSERT INTO pokemon (pokemon_species, pokemon_level, trainer_id, pokemon_is_in_p
  VALUES ("Pikachu11", "58", 1, TRUE),
         ("Staryu11",  "44", 1, TRUE),
         ("Onyx11",    "52", 1, TRUE),
-        ("Staryu21",  "44", 1, TRUE),
-        ("Onyx21",    "52", 1, TRUE),
-        ("Magicarp11","12", 1, TRUE);
+        ("Staryu21",  "44", 1, TRUE);
+
+INSERT INTO pokemon (pokemon_species, pokemon_level, trainer_id, pokemon_is_in_party)
+ VALUES ("Pikachu11", "58", 1, TRUE),
+        ("Staryu11",  "44", 1, TRUE);        
 
 
 SELECT pokemon_species from pokemon
