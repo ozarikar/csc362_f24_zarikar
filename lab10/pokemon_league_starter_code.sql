@@ -34,3 +34,36 @@ INSERT INTO pokemon (pokemon_species, pokemon_level, trainer_id, pokemon_is_in_p
         ("Staryu",  "44", 2, TRUE),
         ("Onyx",    "52", 3, TRUE),
         ("Magicarp","12", 1, FALSE);
+
+
+CDELIMITER //
+
+-- Trigger to prevent a trainer from having more than 6 Pokémon
+CREATE TRIGGER before_pokemon_insert 
+BEFORE INSERT ON pokemon 
+FOR EACH ROW 
+BEGIN
+    DECLARE pokemon_count INT;
+
+    -- Count the number of Pokémon a trainer currently has
+    SELECT COUNT(*) INTO pokemon_count
+    FROM pokemon
+    WHERE trainer_id = NEW.trainer_id;
+
+    -- Check if adding this Pokémon would exceed the limit of 6
+    IF pokemon_count >= 6 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'A trainer can have a maximum of 6 Pokémon.';
+    END IF;
+END;
+//
+
+
+-- this is for testing purpose > 6
+INSERT INTO pokemon (pokemon_species, pokemon_level, trainer_id, pokemon_is_in_party)
+ VALUES ("Pikachu11", "58", 1, TRUE),
+        ("Staryu11",  "44", 1, TRUE),
+        ("Onyx11",    "52", 1, TRUE),
+        ("Staryu21",  "44", 1, TRUE),
+        ("Onyx21",    "52", 1, TRUE),
+        ("Magicarp11","12", 1, TRUE);
