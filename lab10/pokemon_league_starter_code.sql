@@ -53,7 +53,7 @@ BEGIN
     -- Check if adding this Pokémon would exceed the limit of 6
     IF pokemon_count >= 6 THEN
         SIGNAL SQLSTATE '1644'
-        SET MESSAGE_TEXT = 'A trainer can have a maximum of 6 Pokemon.';
+        SET MESSAGE_TEXT = 'A trainer can have a maximum of 6 Pokemon!';
     END IF;
 END;
 //
@@ -72,7 +72,7 @@ BEGIN
     -- check on if its already one left
     IF pokemon_count <= 1 THEN
     SQLSTATE '1644'
-    SET MESSAGE_TEXT = 'A trainer must have at least 1 Pokemon';
+    SET MESSAGE_TEXT = 'A trainer must have at least 1 Pokemon !';
     END IF;
     END;
     //
