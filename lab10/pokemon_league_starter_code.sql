@@ -36,7 +36,7 @@ INSERT INTO pokemon (pokemon_species, pokemon_level, trainer_id, pokemon_is_in_p
         ("Magicarp","12", 1, FALSE);
 
 
-CDELIMITER //
+DELIMITER //
 
 -- Trigger to prevent a trainer from having more than 6 Pokémon
 CREATE TRIGGER before_pokemon_insert 
@@ -57,6 +57,8 @@ BEGIN
     END IF;
 END;
 //
+
+DELIMITER ;
 
 
 -- this is for testing purpose > 6
