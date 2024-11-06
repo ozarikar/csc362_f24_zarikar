@@ -52,11 +52,30 @@ BEGIN
 
     -- Check if adding this Pokémon would exceed the limit of 6
     IF pokemon_count >= 6 THEN
-        SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'A trainer can have a maximum of 6 Pokémon.';
+        SIGNAL SQLSTATE '1644'
+        SET MESSAGE_TEXT = 'A trainer can have a maximum of 6 Pokemon.';
     END IF;
 END;
 //
+
+CREATE TRIGGER before_pokemon_delete
+BEFORE DELETE ON pokemon
+FOR EACH ROW
+BEGIN
+    DECLARE pokemon_count INT;
+
+    -- counting number of pokemons associated with a trainer
+    SELECT COUNT(*) INTO pokemon_count
+    FROM pokemon
+    WHERE trainer_id = OLD.trainer_id;
+
+    -- check on if its already one left
+    IF pokemon_count <= 1 THEN
+    SQLSTATE '1644'
+    SET MESSAGE_TEXT = 'A trainer must have at least 1 Pokemon';
+    END IF;
+    END;
+    //
 
 DELIMITER ;
 
@@ -75,3 +94,6 @@ INSERT INTO pokemon (pokemon_species, pokemon_level, trainer_id, pokemon_is_in_p
 
 SELECT pokemon_species from pokemon
 where trainer_id = 1;
+
+DELETE FROM pokemon
+ where trainer_id = 2;
