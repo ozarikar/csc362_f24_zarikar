@@ -1,0 +1,56 @@
+BUSINESS RULE SPECIFICATIONS
+
+RULE INFORMATION
+
+Statement: A rug cannot be deleted if it has been sold or loaned for a trial.
+
+Constraint: Rugs can only be deleted if they have never been sold or loaned to a customer.
+
+Type:     Database Oriented:     X
+          Application Oriented   _ 
+
+Category: Field Specific:        _ 
+          Relationship Specific: X
+
+Test On:  Insert:                _ 
+          Delete:                X
+          Update:                _
+
+
+STRUCTURES AFFECTED
+
+Field Names: invetory_id
+
+Table Names: Inventory, Sales, Trial
+
+
+FIELD ELEMENTS AFFECTED
+
+Physical Elements: Data Type:           INT
+                   Length:              _ 
+                   Character Support:   0-9
+
+Logical Elements:  Key Type:            PK
+                   Key Structure:       Single Field
+                   Uniqueness:          X
+                   Null Support:        _ 
+                   Values Entered By:   System
+                   Range of Values:     >0 
+                   Edit Rule:           _
+
+
+RELATIONSHIP CHARACTERISTICS AFFECTED
+
+    Deletion rule:              _Deny
+    Type of participation:      _
+    Degree of participation:    _
+
+    
+ACTION TAKEN
+
+_ If a delete operation is attempted on a Inventory record that has been associated
+ with any sales or trial records, the operation will be denied, preserving 
+ historical sales and Trial data
+
+
+NOTES: _
