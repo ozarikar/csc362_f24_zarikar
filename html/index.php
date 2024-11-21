@@ -35,7 +35,3 @@ if (str_contains($_SERVER['HTTP_USER_AGENT'], 'Mac')) {
 Hi <?php echo htmlspecialchars($_POST['name']); ?>.
 You are <?php echo (int) $_POST['age']; ?> years old.
 
-
-<?php
-echo " hello everyone"
-?>
