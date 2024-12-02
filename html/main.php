@@ -34,7 +34,7 @@ $products = getProducts($conn);
             <option value="">All Categories</option>
             <?php
             // Get categories from the database
-            $categories = getCategories($conn); // This function will now use the database connection.
+            $categories = getCategories($conn); 
             foreach ($categories as $category) {
                 echo '<option value="' . htmlspecialchars($category['id']) . '">' . htmlspecialchars($category['name']) . '</option>';
             }
@@ -43,7 +43,7 @@ $products = getProducts($conn);
         <button type="submit">Filter</button>
     </form>
 
-    <!-- Step 5: Display Products -->
+
     <div class="product-list">
         <?php
         if (!empty($products)) {
@@ -69,7 +69,7 @@ $products = getProducts($conn);
 </html>
 
 <?php
-// Function Definitions
+
 // Function to retrieve products from the database
 function getProducts($conn) {
     $sql = "SELECT * FROM products";
