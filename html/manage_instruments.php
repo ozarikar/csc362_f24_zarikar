@@ -29,9 +29,19 @@ function result_to_html_table($result) {
         <!-- Begin body - - - - - - - - - - - - - - - - - - - - - -->
         <tbody>
         <?php for ($i=0; $i<$n_rows; $i++){ ?>
-            <?php $id = $qryres[$i][0]; ?>
+            <?php $id = $qryres[$i][0]; 
+            $student_name = $qryres[$i][2];?>
+
             <tr>
-            <td><input type="checkbox" name="checkbox<?php echo $id;?>" value="<?php echo $id;?>" /></td>     
+            <td>    
+            <?php if($student_name === NULL){?>
+            <input type="checkbox" name="checkbox<?php echo $id;?>" value="<?php echo $id;?>" />
+            <?php }
+             else{ ?>
+                <input type="checkbox" name="checkbox<?php echo $id;?>" value="<?php echo $id;?>" disabled="disabled" />
+            <?php } ?>  
+            </td>  
+                 
             <?php for($j=0; $j<$n_cols; $j++){ ?>
                 <td><?php echo $qryres[$i][$j]; ?></td>
             <?php } ?>
@@ -75,10 +85,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_records'])) {
 
 
 <?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_records'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delbtn'])) {
     // Prepare the deletion statement
-    $del_stmt = file_get_contents("delete_instrument.sql");
-    $del_stmt = $conn->prepare($del_stmt);
+    $del_stmt = $conn->prepare("DELETE FROM instruments WHERE instrument_id=(?);");
     $del_stmt->bind_param('i', $id);
 
     // Loop through POST data to find selected checkboxes
@@ -93,6 +102,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_records'])) {
     header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
     exit();
 }
+
+// Close the connection
+$conn->close();
 ?>
 
 
