@@ -37,4 +37,23 @@ function result_to_html_table($result) {
             </tr>
         <?php } ?>
         </tbody></table>
-<?php } ?>
+<?php } 
+
+// Load the SQL query from the file
+$sql_location = '/home/omkarzarikar/csc362_f24_zarikar/lab8';
+$sel_tbl = file_get_contents($sql_location . 'select_instruments.sql');
+
+// Execute the query
+$result = $conn->query($sel_tbl);
+
+// Check if the query returned any results
+if ($result) {
+    // Use the function to display results in an HTML table
+    result_to_html_table($result);
+} else {
+    echo "Error executing query: " . $conn->error;
+}
+
+// Close the connection
+$conn->close();
+?>
