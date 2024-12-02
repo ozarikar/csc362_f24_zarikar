@@ -40,3 +40,7 @@ function result_to_html_table($result) {
     $result = $conn->query($sel_tbl);   // 3
     result_to_html_table($result);      // 4
 ?>
+
+<form method="POST">
+<input type="submit" name="add_records" value="Add extra records" />
+</form>
