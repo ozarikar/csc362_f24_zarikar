@@ -1,12 +1,10 @@
-USE instrument_rentals;
-
-SELECT 
-    instruments.instrument_id, 
+SELECT
+    instruments.instrument_id,
     instruments.instrument_type, 
     students.student_name
-FROM 
+FROM
     instruments
-LEFT JOIN 
+LEFT JOIN
     student_instruments ON instruments.instrument_id = student_instruments.instrument_id
-LEFT JOIN 
+LEFT JOIN
     students ON student_instruments.student_id = students.student_id;
