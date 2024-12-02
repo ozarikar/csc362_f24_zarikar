@@ -1,15 +1,3 @@
-<html>
-    <head>
-    <title>PHP Test Page</title>
-    </head>
-    <body>
-    <?php echo "Hello world!"; ?>
-    </body>
-</html>
-
-
-
-
 <?php
 
 function result_to_html_table($result) {
@@ -53,6 +41,22 @@ function result_to_html_table($result) {
     result_to_html_table($result);      // 4
 ?>
 
+<?php
+
+
+// Add form with button to add records
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_records'])) {
+    // Load SQL command for adding instruments
+    $add_sql = file_get_contents('/home/omkarzarikar/csc362_f24_zarikar/html/add_instruments.sql');
+    $conn->query($add_sql);
+
+    // Redirect to avoid duplicate submission
+    header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
+    exit();
+}
+?>
+
+<!-- HTML Form for adding records -->
 <form method="POST">
-<input type="submit" name="add_records" value="Add extra records" />
+    <input type="submit" name="add_records" value="Add extra records" />
 </form>
