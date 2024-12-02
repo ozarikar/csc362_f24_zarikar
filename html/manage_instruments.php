@@ -43,7 +43,7 @@ function result_to_html_table($result) {
 <?php
     echo "Script is running here!";
     $sql_location = '/home/omkarzarikar/csc362_f24_zarikar/html/';
-    $conn = new mysqli( 'localhost', 'webuser', 'fraudsters', 'instrument_rentals.sql');    // 1
+    $conn = new mysqli( 'localhost', 'omkarzarikar', '631163', 'instrument_rentals');    // 1
     // Check connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
