@@ -1,41 +1,20 @@
 <?php
-// Include database connection
-require_once 'db_connection.php';
-
-// Function to retrieve products with optional category filtering
-function getProducts($category = null) {
-    global $conn;
-    
-    // SQL query to retrieve products with optional category filtering
-    $sql = "SELECT p.id, p.name, p.price, p.description, c.category_name 
-            FROM products p
-            LEFT JOIN product_categories c ON p.category_id = c.id";
-    
-    if ($category) {
-        $sql .= " WHERE c.category_name = ?";
-    }
-    
-    $stmt = $conn->prepare($sql);
-    if ($category) {
-        $stmt->bind_param('s', $category);
-    }
-    
-    $stmt->execute();
-    $result = $stmt->get_result();
-    
-    $products = [];
-    while ($row = $result->fetch_assoc()) {
-        $products[] = $row;
-    }
-    
-    return $products;
+$config = parse_ini_file('/home/omkarzarikar/mysql.ini');
+$dbname = 'upward_outfitters';
+$conn = new mysqli(
+    $config['mysqli.default_host'],
+    $config['mysqli.default_user'],
+    $config['mysqli.default_pw'],
+    $dbname
+);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
 
-// Retrieve category from GET request if available
-$category = isset($_GET['category']) ? $_GET['category'] : null;
+//  Retrieve the Product Data
+$products = getProducts($conn); 
 
-// Get the list of products
-$products = getProducts($category);
 ?>
 
 <!DOCTYPE html>
@@ -44,46 +23,91 @@ $products = getProducts($category);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Catalog</title>
-    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h1>Product Catalog</h1>
-    
+
+    <!--  Product Category Filter -->
     <form method="GET" action="">
         <label for="category">Filter by Category:</label>
         <select name="category" id="category">
-            <option value="">All</option>
+            <option value="">All Categories</option>
             <?php
-            // Fetch distinct categories for the dropdown
-            $categorySql = "SELECT DISTINCT category_name FROM product_categories";
-            $categoryResult = $conn->query($categorySql);
-            while ($catRow = $categoryResult->fetch_assoc()) {
-                $selected = ($category == $catRow['category_name']) ? 'selected' : '';
-                echo "<option value='" . htmlspecialchars($catRow['category_name']) . "' $selected>" . htmlspecialchars($catRow['category_name']) . "</option>";
+            // Get categories from the database
+            $categories = getCategories($conn); // This function will now use the database connection.
+            foreach ($categories as $category) {
+                echo '<option value="' . htmlspecialchars($category['id']) . '">' . htmlspecialchars($category['name']) . '</option>';
             }
             ?>
         </select>
         <button type="submit">Filter</button>
     </form>
 
+    <!-- Step 5: Display Products -->
     <div class="product-list">
-        <?php if (count($products) > 0): ?>
-            <?php foreach ($products as $product): ?>
-                <div class="product">
-                    <h2><?php echo htmlspecialchars($product['name']); ?></h2>
-                    <p>Price: $<?php echo htmlspecialchars($product['price']); ?></p>
-                    <p>Description: <?php echo htmlspecialchars($product['description']); ?></p>
-                    <p>Category: <?php echo htmlspecialchars($product['category_name']); ?></p>
-                </div>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <p>No products available.</p>
-        <?php endif; ?>
+        <?php
+        if (!empty($products)) {
+            foreach ($products as $product) {
+                // Filter by selected category if necessary
+                if (!empty($_GET['category']) && $_GET['category'] != $product['category_id']) {
+                    continue;
+                }
+
+                echo '<div class="product-item">';
+                echo '<h2>' . htmlspecialchars($product['name']) . '</h2>';
+                echo '<p>Price: $' . htmlspecialchars($product['sale_price']) . '</p>';
+                echo '<p>' . htmlspecialchars($product['description']) . '</p>';
+                echo '<p>Warranty Length: ' . htmlspecialchars($product['warranty_length']) . ' months</p>';
+                echo '</div>';
+            }
+        } else {
+            echo '<p>No products available.</p>';
+        }
+        ?>
     </div>
 </body>
 </html>
 
 <?php
+// Function Definitions
+// Function to retrieve products from the database
+function getProducts($conn) {
+    $sql = "SELECT * FROM products";
+    $result = $conn->query($sql);
+
+    $products = [];
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $products[] = [
+                'id' => $row['product_id'],
+                'name' => $row['product_name'],
+                'sale_price' => $row['product_sale_price'],
+                'description' => $row['product_description'],
+                'warranty_length' => $row['product_warranty_length'],
+                'category_id' => $row['product_category_id'],
+            ];
+        }
+    }
+    return $products;
+}
+
+// Function to retrieve categories from the database
+function getCategories($conn) {
+    $sql = "SELECT * FROM product_categories";
+    $result = $conn->query($sql);
+
+    $categories = [];
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $categories[] = [
+                'id' => $row['product_category_id'],
+                'name' => $row['product_category_name'],
+            ];
+        }
+    }
+    return $categories;
+}
+
 // Close the database connection
 $conn->close();
 ?>
