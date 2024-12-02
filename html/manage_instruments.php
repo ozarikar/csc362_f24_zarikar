@@ -42,7 +42,7 @@ function result_to_html_table($result) {
 
 <?php
     echo "Script is running here!";
-    $sql_location = '/home/omkarzarikar/csc362_f24_zarikar/lab8/';
+    $sql_location = '/home/omkarzarikar/csc362_f24_zarikar/html/';
     $conn = new mysqli( 'localhost', 'webuser', 'fraudsters', 'instrument_rentals');    // 1
     // Check connection
     if ($conn->connect_error) {
