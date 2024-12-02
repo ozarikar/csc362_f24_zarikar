@@ -41,17 +41,26 @@ function result_to_html_table($result) {
 <?php } ?>
 
 <?php
-    echo "Script is running here!";
+    echo "Script is running here !</br>";
     $sql_location = '/home/omkarzarikar/csc362_f24_zarikar/html/';
+    echo "SQL file path:  " . $sql_location . 'select_instruments.sql'."</br>";
+
+
+
     $conn = new mysqli( 'localhost', 'omkarzarikar', '631163', 'instrument_rentals');    // 1
     // Check connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-?>
-    $sel_tbl = file_get_contents($sql_location . 'select_instruments.sql');         // 2
+
+    $sel_tbl = file_get_contents($sql_location . 'select_instruments.sql');   // 2
     $result = $conn->query($sel_tbl);   // 3
-    result_to_html_table($result);      // 4
+    if (!$result) {
+        die("Error executing query: " . $conn->error);
+    } else {
+        echo "Query executed successfully!";
+        result_to_html_table($result);
+    }
 ?>
 
 <?php
