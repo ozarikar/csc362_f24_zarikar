@@ -1,3 +1,15 @@
+<html>
+    <head>
+    <title>PHP Test Page</title>
+    </head>
+    <body>
+    <?php echo "Hello world!"; ?>
+    </body>
+</html>
+
+
+
+
 <?php
 
 function result_to_html_table($result) {
@@ -44,4 +56,3 @@ function result_to_html_table($result) {
 <form method="POST">
 <input type="submit" name="add_records" value="Add extra records" />
 </form>
-hello
