@@ -1,11 +1,5 @@
 <?php
-$config = parse_ini_file('/home/omkarzarikar/mysql.ini');
-$dbname = 'instrument_rentals';
-$conn = new mysqli(
-            $config['mysqli.default_host'],
-            $config['mysqli.default_user'],
-            $config['mysqli.default_pw'],
-            $dbname);
+
 function result_to_html_table($result) {
         $qryres = $result->fetch_all();
         $n_rows = $result->num_rows;
@@ -37,23 +31,12 @@ function result_to_html_table($result) {
             </tr>
         <?php } ?>
         </tbody></table>
-<?php } 
+<?php } ?>
 
-// Load the SQL query from the file
-$sql_location = '/home/omkarzarikar/csc362_f24_zarikar/lab8';
-$sel_tbl = file_get_contents($sql_location . 'select_instruments.sql');
-
-// Execute the query
-$result = $conn->query($sel_tbl);
-
-// Check if the query returned any results
-if ($result) {
-    // Use the function to display results in an HTML table
-    result_to_html_table($result);
-} else {
-    echo "Error executing query: " . $conn->error;
-}
-
-// Close the connection
-$conn->close();
+<?php
+    $sql_location = '/home/omkarzarikar/csc362_f24_zarikar/lab8/';
+    $conn = new mysqli( 'localhost', 'webuser', 'fraudsters', 'instrument_rentals');    // 1
+    $sel_tbl = file_get_contents($sql_location . 'select_instruments.sql');         // 2
+    $result = $conn->query($sel_tbl);   // 3
+    result_to_html_table($result);      // 4
 ?>
