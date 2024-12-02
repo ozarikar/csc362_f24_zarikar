@@ -1,5 +1,11 @@
 <?php
-
+$config = parse_ini_file('/home/omkarzarikar/mysql.ini');
+$dbname = 'instrument_rentals';
+$conn = new mysqli(
+            $config['mysqli.default_host'],
+            $config['mysqli.default_user'],
+            $config['mysqli.default_pw'],
+            $dbname);
 function result_to_html_table($result) {
         $qryres = $result->fetch_all();
         $n_rows = $result->num_rows;
