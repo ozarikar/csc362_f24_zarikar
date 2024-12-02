@@ -1,4 +1,11 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+?>
+
+
+<?php
 
 function result_to_html_table($result) {
         $qryres = $result->fetch_all();
@@ -34,8 +41,14 @@ function result_to_html_table($result) {
 <?php } ?>
 
 <?php
+    echo "Script is running here!";
     $sql_location = '/home/omkarzarikar/csc362_f24_zarikar/lab8/';
     $conn = new mysqli( 'localhost', 'webuser', 'fraudsters', 'instrument_rentals');    // 1
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+?>
     $sel_tbl = file_get_contents($sql_location . 'select_instruments.sql');         // 2
     $result = $conn->query($sel_tbl);   // 3
     result_to_html_table($result);      // 4
