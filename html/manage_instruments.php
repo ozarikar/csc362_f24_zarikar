@@ -74,3 +74,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_records'])) {
 ?>
 
 
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_records'])) {
+    // Prepare the deletion statement
+    $del_stmt = file_get_contents("delete_instrument.sql");
+    $del_stmt = $conn->prepare($del_stmt);
+    $del_stmt->bind_param('i', $id);
+
+    // Loop through POST data to find selected checkboxes
+    foreach ($_POST as $key => $value) {
+        if (strpos($key, 'checkbox') === 0) {
+            $id = (int)$value;
+            $del_stmt->execute();
+        }
+    }
+
+    // Redirect to avoid duplicate deletion on refresh
+    header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
+    exit();
+}
+?>
+
+
