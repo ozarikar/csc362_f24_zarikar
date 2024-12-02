@@ -1,3 +1,5 @@
+USE instrument_rentals;
+
 SELECT 
     instruments.instrument_id, 
     instruments.instrument_type, 
