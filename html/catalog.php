@@ -46,9 +46,7 @@ $products = getProducts($conn); // This function will now use the database conne
             text-decoration: none;
             display: block;
         }
-        nav ul li a:hover {
-            background-color: #111;
-        }
+        
     </style>
 </head>
 <body>
@@ -59,7 +57,7 @@ $products = getProducts($conn); // This function will now use the database conne
             <li><a href="inventory.php">Inventory</a></li>
             <li><a href="partners.php">Partners</a></li>
             <li><a href="transactions.php">Transactions</a></li>
-            <li><a href="cart.php">Cart <img src="/icons/cart_icon.png" alt="Cart Icon" style="width:20px; height:20px;"></a></li>
+            <li><a href="cart.php"><img src="cart_icon.png" alt="Cart Icon" style="width:20px; height:20px;filter: invert(1);"></a></li>
             <?php
             // Get categories from the database
             $categories = getCategories($conn);
@@ -67,6 +65,7 @@ $products = getProducts($conn); // This function will now use the database conne
                 echo '<li><a href="catalog.php?category=' . htmlspecialchars($category['id']) . '">' . htmlspecialchars($category['name']) . '</a></li>';
             }
             ?>
+            <li><a href="logout.php"><img src="log_out_icon.png" alt="Log Out Icon" style="width:20px; height:20px;filter: invert(1);"></a></li>
         </ul>
     </nav>
 
