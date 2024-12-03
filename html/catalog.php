@@ -59,7 +59,7 @@ $products = getProducts($conn); // This function will now use the database conne
             <li><a href="inventory.php">Inventory</a></li>
             <li><a href="partners.php">Partners</a></li>
             <li><a href="transactions.php">Transactions</a></li>
-            <li><a href="cart.php">Cart <img src="icons/cart_icon.png" alt="Cart Icon" style="width:20px; height:20px;"></a></li>
+            <li><a href="cart.php">Cart <img src="/icons/cart_icon.png" alt="Cart Icon" style="width:20px; height:20px;"></a></li>
             <?php
             // Get categories from the database
             $categories = getCategories($conn);
