@@ -41,11 +41,8 @@
                 }
             }
             ?>
-            <li><a href="partners.php">Partners</a></li>
-            <li><a href="transactions.php">Transactions</a></li>
             <?php
             // Get categories from the database
-            require_once 'config.php'; // Assuming this contains the $conn connection
             $categories = getCategories($conn);
             foreach ($categories as $category) {
                 echo '<li><a href="catalog.php?category=' . htmlspecialchars($category['id']) . '">' . htmlspecialchars($category['name']) . '</a></li>';
