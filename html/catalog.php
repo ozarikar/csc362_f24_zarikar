@@ -1,4 +1,10 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+?>
+
+<?php
 
 $config = parse_ini_file('/home/omkarzarikar/mysql.ini');
 $dbname = 'upward_outfitters';
@@ -26,7 +32,7 @@ $products = getProducts($conn);
 </head>
 <body>
     <!-- Include Navigation Bar -->
-    <?php include 'navbar.php'; ?>
+    <?php require 'navbar.php'; ?>
 
     <h1>Product Catalog</h1>
 
