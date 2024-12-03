@@ -33,7 +33,7 @@
             <li><a href="home.php">Home</a></li>
             <?php
             if (isset($_SESSION['user_role'])) {
-                if ($_SESSION['user_role'] != 1) { // Employee
+                if ($_SESSION['user_role'] == 1) { // Employee
                     echo '<li><a href="inventory.php">Inventory</a></li>';
                 }
                 if ($_SESSION['user_role'] == 0) { // Customer
