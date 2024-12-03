@@ -13,21 +13,18 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Step 2: Retrieve the Product Data
-$products = getProducts($conn); // This function will now use the database connection.
+//Retrieve the Product Data
+$products = getProducts($conn); 
 
-// Step 3: Display Products
+//  Display Products
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Catalog</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Optional: Add a CSS file to style the page -->
+    <title>Product Catalog</title> 
     <style>
-        /* Simple styling for the navigation bar */
+        /* styling for the navigation bar */
         nav {
             background-color: #333;
             overflow: hidden;
@@ -53,11 +50,20 @@ $products = getProducts($conn); // This function will now use the database conne
     <!-- Navigation Bar -->
     <nav>
         <ul>
-            <li><a href="home.php">Home</a></li>
-            <li><a href="inventory.php">Inventory</a></li>
-            <li><a href="partners.php">Partners</a></li>
-            <li><a href="transactions.php">Transactions</a></li>
-            <li><a href="cart.php"><img src="cart_icon.png" alt="Cart Icon" style="width:20px; height:20px;filter: invert(1);"></a></li>
+        <li><a href="home.php">Home</a></li>    
+        <?php
+            if (isset($_SESSION['user_role'])) {
+                if ($_SESSION['user_role'] == 1) { // Employee
+                    echo '<li><a href="inventory.php">Inventory</a></li>';
+                    echo '<li><a href="partners.php">Partners</a></li>';
+                    echo '<li><a href="transactions.php">Transactions</a></li>';
+
+                }
+                if ($_SESSION['user_role'] == 0) { // Customer
+                    echo '<li><a href="cart.php">Cart <img src="cart_icon.png" alt="Cart Icon" style="width:20px; height:20px; filter: invert(1);"></a></li>';
+                }
+            }
+            ?>
             <?php
             // Get categories from the database
             $categories = getCategories($conn);
@@ -71,7 +77,7 @@ $products = getProducts($conn); // This function will now use the database conne
 
     <h1>Product Catalog</h1>
 
-    <!-- Step 4: Product Category Filter -->
+    <!--  Product Category Filter -->
     <form method="GET" action="">
         <label for="category">Filter by Category:</label>
         <select name="category" id="category">
@@ -86,7 +92,7 @@ $products = getProducts($conn); // This function will now use the database conne
         <button type="submit">Filter</button>
     </form>
 
-    <!-- Step 5: Display Products in a Table with Add to Cart Option -->
+    <!-- Display Products in a Table with Add to Cart Option -->
     <form method="POST" action="cart.php">
         <table border="1" cellpadding="10" cellspacing="0">
             <thead>
@@ -129,7 +135,7 @@ $products = getProducts($conn); // This function will now use the database conne
 </html>
 
 <?php
-// Function Definitions
+
 // Function to retrieve products from the database
 function getProducts($conn) {
     $sql = "SELECT * FROM products";
