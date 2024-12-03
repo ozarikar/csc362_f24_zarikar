@@ -22,6 +22,9 @@
             text-decoration: none;
             display: block;
         }
+        nav ul li a:hover {
+            background-color: #111;
+        }
         
     </style>
 </head>
