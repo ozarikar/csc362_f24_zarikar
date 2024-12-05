@@ -3,6 +3,11 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 ?>
+    <!-- Include Navigation Bar -->
+    <?php 
+    require 'navbar.php'; 
+    ?>
+
 
 <?php
 
@@ -31,11 +36,7 @@ $products = getProducts($conn);
     <title>Product Catalog</title> 
 </head>
 <body>
-    <!-- Include Navigation Bar -->
-    <?php 
-    require 'navbar.php';  
-    ?>
-
+<?php   show_navbar($conn);   ?>
     <h1>Product Catalog</h1>
 
     <!--  Product Category Filter -->

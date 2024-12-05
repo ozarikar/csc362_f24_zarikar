@@ -1,7 +1,8 @@
-<?php session_start(); ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<?php
+
+// Function to 
+function show_navbar($conn) {
+    ?>
 <style>
         /* styling for the navigation bar */
         nav {
@@ -27,8 +28,8 @@
         }
         
     </style>
-</head>
-<body>
+
+
     <!-- Navigation Bar -->
     <nav>
         <ul>
@@ -56,6 +57,7 @@
             <li><a href="logout.php"><img src="log_out_icon.png" alt="Log Out Icon" style="width:20px; height:20px;filter: invert(1);"></a></li>
         </ul>
     </nav>
-
-</body>
-</html>
+    <?php
+        }
+        ?>
+        
