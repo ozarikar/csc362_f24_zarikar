@@ -32,7 +32,8 @@ $products = getProducts($conn);
 </head>
 <body>
     <!-- Include Navigation Bar -->
-    <?php require 'navbar.php'; ?>
+    <?php require 'navbar.php'; 
+     show_navbar();?>
 
     <h1>Product Catalog</h1>
 
