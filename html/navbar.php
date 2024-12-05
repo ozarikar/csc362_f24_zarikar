@@ -1,6 +1,30 @@
 <?php
 function show_navbar() {
     ?>
+    <style>
+        /* Simple styling for the navigation bar */
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        nav ul li {
+            padding: 14px 20px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+        }
+        nav ul li a:hover {
+            background-color: #111;
+        }
+    </style>
     <nav>
         <ul>
             <li><a href="home.php">Home</a></li>
@@ -26,30 +50,7 @@ function show_navbar() {
             ?>
         </ul>
     </nav>
-    <style>
-        /* Simple styling for the navigation bar */
-        nav {
-            background-color: #333;
-            overflow: hidden;
-        }
-        nav ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-        }
-        nav ul li {
-            padding: 14px 20px;
-        }
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            display: block;
-        }
-        nav ul li a:hover {
-            background-color: #111;
-        }
-    </style>
+    
     <?php
 }
 ?>
