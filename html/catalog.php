@@ -33,8 +33,7 @@ $products = getProducts($conn);
 <body>
     <!-- Include Navigation Bar -->
     <?php 
-    require_once 'navbar.php'; 
-    show_navbar(); 
+    require 'navbar.php';  
     ?>
 
     <h1>Product Catalog</h1>
