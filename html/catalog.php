@@ -68,6 +68,8 @@ $products = getProducts($conn);
                     <th>Description</th>
                     <th>Warranty Length (Months)</th>
                     <th>product_length</th>
+                    <th>product_size</th>
+                    <th>product_capacity</th>
                     <th>Quantity</th>
                     <th>Select</th>
                 </tr>
@@ -88,6 +90,18 @@ $products = getProducts($conn);
                         echo '<td>' . htmlspecialchars($product['warranty_length']) . '</td>';
                         if($product['product_length'] !== null){
                             echo '<td>' . htmlspecialchars($product['product_length']) . '</td>';
+                        }
+                        else{
+                            echo '<td>' . " " . '</td>';
+                        }
+                        if($product['product_size'] !== null){
+                            echo '<td>' . htmlspecialchars($product['product_size']) . '</td>';
+                        }
+                        else{
+                            echo '<td>' . " " . '</td>';
+                        }
+                        if($product['product_capacity'] !== null){
+                            echo '<td>' . htmlspecialchars($product['product_capacity']) . '</td>';
                         }
                         else{
                             echo '<td>' . " " . '</td>';
@@ -148,6 +162,8 @@ function getProducts($conn) {
                 'category_id' => $row['product_category_id'],
                 'product_size' => $row['product_size'],
                 'product_length' => $row['product_length'],
+                'product_capacity' => $row['product_capacity'],
+                'product_size' => $row['product_size'],
             ];
         }
     }
