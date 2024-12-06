@@ -1,5 +1,4 @@
 SELECT 
-    p.product_id,
-    p.product_name
+    GROUP_CONCAT(product_length) AS product_lengths
 FROM 
-    products p;
+    products_length;
