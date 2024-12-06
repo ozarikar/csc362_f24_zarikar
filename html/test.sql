@@ -14,3 +14,5 @@ LEFT JOIN
     products_size ps ON p.product_id = ps.product_id
 GROUP BY 
     p.product_id, p.product_name, pb.product_brand_name;
+
+SELECT * from product_size
