@@ -85,6 +85,7 @@ $products = getProducts($conn);
                         echo '<td>$' . htmlspecialchars($product['sale_price']) . '</td>';
                         echo '<td>' . htmlspecialchars($product['description']) . '</td>';
                         echo '<td>' . htmlspecialchars($product['warranty_length']) . '</td>';
+                        echo '<td>' . htmlspecialchars($product['warranty_length']) . '</td>';
                         echo '<td><input type="number" name="quantity[' . htmlspecialchars($product['id']) . ']" min="1" value="1"></td>';
                         echo '<td><input type="checkbox" name="product_ids[]" value="' . htmlspecialchars($product['id']) . '"></td>';
                         echo '</tr>';
@@ -104,7 +105,32 @@ $products = getProducts($conn);
 
 // Function to retrieve products from the database
 function getProducts($conn) {
-    $sql = "SELECT * FROM products";
+    $sql = "
+        SELECT 
+            p.product_id, 
+            p.product_name, 
+            p.product_sale_price, 
+            p.product_description, 
+            p.product_warranty_length, 
+            p.product_category_id,
+            GROUP_CONCAT(DISTINCT pl.product_length) AS lengths,
+            GROUP_CONCAT(DISTINCT pss.product_shoe_size) AS shoe_sizes,
+            GROUP_CONCAT(DISTINCT pc.product_capacity) AS capacities,
+            GROUP_CONCAT(DISTINCT psz.product_size) AS sizes
+        FROM 
+            products p
+        LEFT JOIN 
+            products_length pl ON p.product_id = pl.product_id
+        LEFT JOIN 
+            products_shoe_size pss ON p.product_id = pss.product_id
+        LEFT JOIN 
+            products_capacity pc ON p.product_id = pc.product_id
+        LEFT JOIN 
+            products_size psz ON p.product_id = psz.product_id
+        GROUP BY 
+            p.product_id
+    ";
+   
     $result = $conn->query($sql);
 
     $products = [];
@@ -117,6 +143,10 @@ function getProducts($conn) {
                 'description' => $row['product_description'],
                 'warranty_length' => $row['product_warranty_length'],
                 'category_id' => $row['product_category_id'],
+                'lengths' => $row['lengths'] ? explode(',', $row['lengths']) : [],
+                'shoe_sizes' => $row['shoe_sizes'] ? explode(',', $row['shoe_sizes']) : [],
+                'capacities' => $row['capacities'] ? explode(',', $row['capacities']) : [],
+                'sizes' => $row['sizes'] ? explode(',', $row['sizes']) : []
             ];
         }
     }
