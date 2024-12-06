@@ -13,7 +13,7 @@ mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 $sql_location = "./sql/"; 
 
-$config = parse_ini_file('home/omkarzarikar/mysql.ini');
+$config = parse_ini_file('/home/omkarzarikar/mysql.ini');
 $dbname = 'upward_outfitters';
 $conn = new mysqli(
     $config['mysqli.default_host'],
