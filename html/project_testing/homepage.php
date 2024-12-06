@@ -1,11 +1,3 @@
-<?php
-$conn = new mysqli(
-    $config['mysqli.default_host'],
-    $config['mysqli.default_user'],
-    $config['mysqli.default_pw'],
-    $dbname
-);
-?>
  <!-- Include Navigation Bar function php-->
  <?php 
 require 'navbar.php'; 
@@ -17,7 +9,7 @@ require 'navbar.php';
     error_reporting(E_ALL);
 
 # Create new connection, specifying the database we care about
-    $config = parse_ini_file('../../mysql.ini');
+    $config = parse_ini_file('/home/omkarzarikar/mysql.ini');
     $dbname = 'upward_outfitters';
     $conn = new mysqli(
             $config['mysqli.default_host'],
