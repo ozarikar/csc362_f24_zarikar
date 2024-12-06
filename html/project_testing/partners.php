@@ -1,3 +1,8 @@
+ <!-- Include Navigation Bar function php-->
+ <?php 
+require 'navbar.php'; 
+?>
+
 <?php
 // Show all errors 
 ini_set('display_errors', 1);    
@@ -6,9 +11,9 @@ error_reporting(E_ALL);
 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
-$sql_location = "/home/omkarzarikar/csc36-proj-Fall24-linkedin_fraudsters/html/sql/"; 
+$sql_location = "./sql/"; 
 
-$config = parse_ini_file('/home/omkarzarikar/mysql.ini');
+$config = parse_ini_file('../../mysql.ini');
 $dbname = 'upward_outfitters';
 $conn = new mysqli(
     $config['mysqli.default_host'],
@@ -113,6 +118,10 @@ $partners = fetch_partners($conn);
     <title>Manage Partners</title>
 </head>
 <body>
+    <?php  show_navbar($conn);   
+    ?>
+
+
     <h1>Partners</h1>
 
     <form method="POST">
