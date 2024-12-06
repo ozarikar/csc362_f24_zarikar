@@ -67,9 +67,9 @@ $products = getProducts($conn);
                     <th>Price</th>
                     <th>Description</th>
                     <th>Warranty Length (Months)</th>
-                    <th>product_length</th>
-                    <th>product_size</th>
-                    <th>product_capacity</th>
+                    <th>Lengths</th>
+                    <th>Sizes</th>
+                    <th>Brand</th>
                     <th>Quantity</th>
                     <th>Select</th>
                 </tr>
