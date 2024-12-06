@@ -15,4 +15,4 @@ LEFT JOIN
 GROUP BY 
     p.product_id, p.product_name, pb.product_brand_name;
 
-SELECT * from product_size
+SELECT * from products_size
