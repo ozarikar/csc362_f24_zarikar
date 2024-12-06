@@ -49,6 +49,7 @@ $products = getProducts($conn);
         <select name="category" id="category">
             <option value="">All Categories</option>
             <?php
+            $categories = getProdCategories($conn);
             // Get categories from the database
             foreach ($categories as $category) {
                 echo '<option value="' . htmlspecialchars($category['id']) . '">' . htmlspecialchars($category['name']) . '</option>';
