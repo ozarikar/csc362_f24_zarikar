@@ -100,8 +100,8 @@ $products = getProducts($conn);
                         else{
                             echo '<td>' . " " . '</td>';
                         }
-                        if($product['product_capacities'] !== null){
-                            echo '<td>' . htmlspecialchars($product['product_capacities']) . '</td>';
+                        if($product['product_brand_name'] !== null){
+                            echo '<td>' . htmlspecialchars($product['product_brand_name']) . '</td>';
                         }
                         else{
                             echo '<td>' . " " . '</td>';
