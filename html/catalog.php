@@ -84,10 +84,10 @@ $products = getProducts($conn);
                         }
 
                         echo '<tr>';
-                        echo '<td>' . htmlspecialchars($product['name']) . '</td>';
-                        echo '<td>$' . htmlspecialchars($product['sale_price']) . '</td>';
-                        echo '<td>' . htmlspecialchars($product['description']) . '</td>';
-                        echo '<td>' . htmlspecialchars($product['warranty_length']) . '</td>';
+                        echo '<td>' . htmlspecialchars($product['product_name']) . '</td>';
+                        echo '<td>$' . htmlspecialchars($product['product_sale_price']) . '</td>';
+                        echo '<td>' . htmlspecialchars($product['product_description']) . '</td>';
+                        echo '<td>' . htmlspecialchars($product['product_warranty_length']) . '</td>';
                         if($product['product_lengths'] !== null){
                             echo '<td>' . htmlspecialchars($product['product_lengths']) . '</td>';
                         }
