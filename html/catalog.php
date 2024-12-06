@@ -160,7 +160,6 @@ function getProducts($conn) {
                 'description' => $row['product_description'],
                 'warranty_length' => $row['product_warranty_length'],
                 'category_id' => $row['product_category_id'],
-                'product_size' => $row['product_size'],
                 'product_length' => $row['product_length'],
                 'product_capacity' => $row['product_capacity'],
                 'product_size' => $row['sizes'],
