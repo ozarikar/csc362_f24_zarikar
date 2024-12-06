@@ -1,4 +1,4 @@
-USE upward_outfitters;
+
 
 SELECT 
         p.product_id,
