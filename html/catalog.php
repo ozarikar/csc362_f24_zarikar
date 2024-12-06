@@ -135,7 +135,7 @@ function getProducts($conn) {
             p.product_category_id,
             pl.product_length,
             pc.product_capacity,
-            psz.product_size
+            GROUP_CONCAT(DISTINCT psz.product_size) AS sizes
         FROM 
             products p
         LEFT JOIN 
@@ -163,7 +163,7 @@ function getProducts($conn) {
                 'product_size' => $row['product_size'],
                 'product_length' => $row['product_length'],
                 'product_capacity' => $row['product_capacity'],
-                'product_size' => $row['product_size'],
+                'product_size' => $row['sizes'],
             ];
         }
     }
