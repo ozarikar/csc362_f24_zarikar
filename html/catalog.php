@@ -88,20 +88,20 @@ $products = getProducts($conn);
                         echo '<td>$' . htmlspecialchars($product['sale_price']) . '</td>';
                         echo '<td>' . htmlspecialchars($product['description']) . '</td>';
                         echo '<td>' . htmlspecialchars($product['warranty_length']) . '</td>';
-                        if($product['product_length'] !== null){
-                            echo '<td>' . htmlspecialchars($product['product_length']) . '</td>';
+                        if($product['product_lengths'] !== null){
+                            echo '<td>' . htmlspecialchars($product['product_lengths']) . '</td>';
                         }
                         else{
                             echo '<td>' . " " . '</td>';
                         }
-                        if($product['product_size'] !== null){
-                            echo '<td>' . htmlspecialchars($product['product_size']) . '</td>';
+                        if($product['product_sizes'] !== null){
+                            echo '<td>' . htmlspecialchars($product['product_sizes']) . '</td>';
                         }
                         else{
                             echo '<td>' . " " . '</td>';
                         }
-                        if($product['product_capacity'] !== null){
-                            echo '<td>' . htmlspecialchars($product['product_capacity']) . '</td>';
+                        if($product['product_capacities'] !== null){
+                            echo '<td>' . htmlspecialchars($product['product_capacities']) . '</td>';
                         }
                         else{
                             echo '<td>' . " " . '</td>';
@@ -123,51 +123,49 @@ $products = getProducts($conn);
 
 <?php
 
-// Function to retrieve products from the database
 function getProducts($conn) {
     $sql = "
-        SELECT 
-            p.product_id, 
-            p.product_name, 
-            p.product_sale_price, 
-            p.product_description, 
-            p.product_warranty_length, 
-            p.product_category_id,
-            pl.product_length,
-            pc.product_capacity,
-            GROUP_CONCAT(DISTINCT psz.product_size) AS sizes
-        FROM 
-            products p
-        LEFT JOIN 
-            products_length pl ON p.product_id = pl.product_id
-        LEFT JOIN 
-            products_capacity pc ON p.product_id = pc.product_id
-        LEFT JOIN 
-            products_size psz ON p.product_id = psz.product_id
-        GROUP BY 
-            p.product_id
-    ";
-   
+    SELECT 
+        p.product_id,
+        p.product_name,
+        p.product_sale_price,
+        p.product_description,
+        p.product_warranty_length,
+        pb.product_brand_name,
+        pc.product_category_name,
+        p.product_discontinued,
+        p.product_discount_pct,
+        GROUP_CONCAT(DISTINCT pl.product_length ORDER BY pl.product_length ASC) AS product_lengths,
+        GROUP_CONCAT(DISTINCT ps.product_size ORDER BY ps.product_size ASC) AS product_sizes,
+        GROUP_CONCAT(DISTINCT pss.product_shoe_size ORDER BY pss.product_shoe_size ASC) AS product_shoe_sizes,
+        GROUP_CONCAT(DISTINCT pcap.product_capacity ORDER BY pcap.product_capacity ASC) AS product_capacities
+    FROM 
+        products p
+    LEFT JOIN 
+        product_brands pb ON p.product_brand_id = pb.product_brand_id
+    LEFT JOIN 
+        product_categories pc ON p.product_category_id = pc.product_category_id
+    LEFT JOIN 
+        products_length pl ON p.product_id = pl.product_id
+    LEFT JOIN 
+        products_size ps ON p.product_id = ps.product_id
+    LEFT JOIN 
+        products_shoe_size pss ON p.product_id = pss.product_id
+    LEFT JOIN 
+        products_capacity pcap ON p.product_id = pcap.product_id
+    GROUP BY 
+        p.product_id, p.product_name, p.product_sale_price, p.product_description, 
+        p.product_warranty_length, pb.product_brand_name, pc.product_category_name,
+        p.product_discontinued, p.product_discount_pct";
+    
     $result = $conn->query($sql);
-
-    $products = [];
     if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $products[] = [
-                'id' => $row['product_id'],
-                'name' => $row['product_name'],
-                'sale_price' => $row['product_sale_price'],
-                'description' => $row['product_description'],
-                'warranty_length' => $row['product_warranty_length'],
-                'category_id' => $row['product_category_id'],
-                'product_length' => $row['product_length'],
-                'product_capacity' => $row['product_capacity'],
-                'product_size' => $row['sizes'],
-            ];
-        }
+        return $result->fetch_all(MYSQLI_ASSOC);
+    } else {
+        return [];
     }
-    return $products;
 }
+
 
 // Function to retrieve categories from the database
 function getCategories($conn) {
