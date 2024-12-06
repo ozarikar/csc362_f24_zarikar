@@ -67,7 +67,7 @@ $products = getProducts($conn);
                     <th>Price</th>
                     <th>Description</th>
                     <th>Warranty Length (Months)</th>
-                    <th>Product Size</th>
+                    <th>product_length</th>
                     <th>Quantity</th>
                     <th>Select</th>
                 </tr>
@@ -86,8 +86,8 @@ $products = getProducts($conn);
                         echo '<td>$' . htmlspecialchars($product['sale_price']) . '</td>';
                         echo '<td>' . htmlspecialchars($product['description']) . '</td>';
                         echo '<td>' . htmlspecialchars($product['warranty_length']) . '</td>';
-                        if($product['product_size'] !== null){
-                            echo '<td>' . htmlspecialchars($product['product_size']) . '</td>';
+                        if($product['product_length'] !== null){
+                            echo '<td>' . htmlspecialchars($product['product_length']) . '</td>';
                         }
                         echo '<td><input type="number" name="quantity[' . htmlspecialchars($product['id']) . ']" min="1" value="1"></td>';
                         echo '<td><input type="checkbox" name="product_ids[]" value="' . htmlspecialchars($product['id']) . '"></td>';
