@@ -1,8 +1,11 @@
 <?php
-    require 'check_authentication.php';
-    check_auth();
+$conn = new mysqli(
+    $config['mysqli.default_host'],
+    $config['mysqli.default_user'],
+    $config['mysqli.default_pw'],
+    $dbname
+);
 ?>
-
  <!-- Include Navigation Bar function php-->
  <?php 
 require 'navbar.php'; 
